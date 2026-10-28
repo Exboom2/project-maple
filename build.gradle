@@ -47,6 +47,13 @@ configure(subprojects) {
     fileTree(assetsFolder).collect { assetsFolder.relativePath(it) }.sort().each {
       assetsFile.append(it + "\n")
     }
+
+    // Create the version file
+    File versionFile = new File(assetsFolder, "version.txt");
+    // Delete in case it exists
+    versionFile.delete()
+    // Add project version
+    versionFile.append("$projectVersion")
   }
   processResources.dependsOn 'generateAssetList'
 
